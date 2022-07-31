@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "286035351616",
+    "project_id": "notes-nferdazel",
+    "storage_bucket": "notes-nferdazel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286035351616:android:bfad640b851e85436aa7a5",
+        "android_client_info": {
+          "package_name": "id.quousever.notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "286035351616-ckm587tld9vcoks5s3b7hgl0hmoa6u77.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlt0lnUYIIXRWP1XUXr7LNV9V1rX1iGvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "286035351616-ckm587tld9vcoks5s3b7hgl0hmoa6u77.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
