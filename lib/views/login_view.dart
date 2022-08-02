@@ -60,26 +60,26 @@ class _LoginViewState extends State<LoginView> {
                   password: password,
                 );
 
-                print(credential);
+                debugPrint(credential.toString());
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'user-not-found') {
                   // ScaffoldMessenger.of(context).showSnackBar(
                   //   SnackBar(content: Text(e.message.toString())),
                   // );
 
-                  print('user not found');
+                  debugPrint('user not found');
                 } else if (e.code == 'wrong-password') {
                   // ScaffoldMessenger.of(context).showSnackBar(
                   //   SnackBar(content: Text(e.message.toString())),
                   // );
 
-                  print('wrong password');
+                  debugPrint('wrong password');
                 }
 
                 // print(e.code);
               } catch (e) {
-                print(e);
-                print(e.runtimeType);
+                debugPrint(e.toString());
+                debugPrint(e.runtimeType.toString());
               }
             },
             child: const Text('Login'),
