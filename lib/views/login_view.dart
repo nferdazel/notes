@@ -1,3 +1,5 @@
+import 'dart:developer' as dev show log;
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -60,26 +62,26 @@ class _LoginViewState extends State<LoginView> {
                   password: password,
                 );
 
-                debugPrint(credential.toString());
+                dev.log(credential.toString());
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'user-not-found') {
                   // ScaffoldMessenger.of(context).showSnackBar(
                   //   SnackBar(content: Text(e.message.toString())),
                   // );
 
-                  debugPrint('user not found');
+                  dev.log('user not found');
                 } else if (e.code == 'wrong-password') {
                   // ScaffoldMessenger.of(context).showSnackBar(
                   //   SnackBar(content: Text(e.message.toString())),
                   // );
 
-                  debugPrint('wrong password');
+                  dev.log('wrong password');
                 }
 
                 // print(e.code);
               } catch (e) {
-                debugPrint(e.toString());
-                debugPrint(e.runtimeType.toString());
+                dev.log(e.toString());
+                dev.log(e.runtimeType.toString());
               }
             },
             child: const Text('Login'),
