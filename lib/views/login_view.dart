@@ -68,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                   (route) => false,
                 );
               } on FirebaseAuthException catch (e) {
-                await errorDialog(context, e.toString());
+                await errorDialog(context, e.message.toString());
               } catch (e) {
                 await errorDialog(context, e.toString());
               }
