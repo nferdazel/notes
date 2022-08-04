@@ -1,5 +1,3 @@
-import 'dart:developer' as dev show log;
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/constants/routes.dart';
@@ -69,23 +67,14 @@ class _LoginViewState extends State<LoginView> {
                 );
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'user-not-found') {
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   SnackBar(content: Text(e.message.toString())),
-                  // );
-
-                  dev.log('user not found');
+                  await errorDialog(context, e.message.toString());
                 } else if (e.code == 'wrong-password') {
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   SnackBar(content: Text(e.message.toString())),
-                  // );
-
-                  dev.log('wrong password');
+                  await errorDialog(context, e.message.toString());
+                } else {
+                  await errorDialog(context, 'Error: ${e.code}');
                 }
-
-                // print(e.code);
               } catch (e) {
-                dev.log(e.toString());
-                dev.log(e.runtimeType.toString());
+                await errorDialog(context, e.toString());
               }
             },
             child: const Text('Login'),
@@ -103,4 +92,26 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
+}
+
+Future<void> errorDialog(
+  BuildContext context,
+  String text,
+) {
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('An error occured'),
+          content: Text(text),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      });
 }
