@@ -1,5 +1,3 @@
-import 'dart:developer' as dev show log;
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/constants/routes.dart';
@@ -59,13 +57,16 @@ class _RegisterViewState extends State<RegisterView> {
               final password = _password.text;
 
               try {
-                final credential =
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                await FirebaseAuth.instance.createUserWithEmailAndPassword(
                   email: email,
                   password: password,
                 );
 
-                dev.log(credential.toString());
+                final user = FirebaseAuth.instance.currentUser;
+                await user?.sendEmailVerification();
+
+                if (!mounted) return;
+                Navigator.of(context).pushNamed(verifyRoute);
               } on FirebaseAuthException catch (e) {
                 await errorDialog(context, e.message.toString());
               } catch (e) {
