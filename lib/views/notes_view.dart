@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notes/services/crud/notes_service.dart';
 
 import '../constants/routes.dart';
 import '../enums/menu_action.dart';
 import '../services/auth/auth_service.dart';
+import '../services/crud/notes_service.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({Key? key}) : super(key: key);
