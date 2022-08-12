@@ -1,4 +1,4 @@
-class DatabaseAlreadyOpenedException implements Exception {}
+class DatabaseAlreadyOpened implements Exception {}
 
 class DatabaseIsNotOpened implements Exception {}
 

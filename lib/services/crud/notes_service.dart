@@ -54,15 +54,14 @@ class NotesService {
   Future<void> _ensureDbIsOpened() async {
     try {
       await open();
-    } on DatabaseAlreadyOpenedException {
-      // ignore: avoid_print
-      print('fine');
+    } on DatabaseAlreadyOpened {
+      // pass
     }
   }
 
   Future<void> open() async {
     if (_db != null) {
-      throw DatabaseAlreadyOpenedException();
+      throw DatabaseAlreadyOpened();
     }
 
     try {
