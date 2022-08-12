@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:notes/utilities/dialogs/logout_dialog.dart';
-import 'package:notes/views/notes/notes_list_view.dart';
 
 import '../../constants/routes.dart';
 import '../../enums/menu_action.dart';
 import '../../services/auth/auth_service.dart';
 import '../../services/crud/notes_service.dart';
+import '../../utilities/dialogs/logout_dialog.dart';
+import 'notes_list_view.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({Key? key}) : super(key: key);
