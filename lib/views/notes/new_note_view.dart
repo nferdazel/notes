@@ -14,6 +14,13 @@ class _NewNoteViewState extends State<NewNoteView> {
   late final NotesService _notesService;
   late final TextEditingController _textController;
 
+  @override
+  void initState() {
+    super.initState();
+    _notesService = NotesService();
+    _textController = TextEditingController();
+  }
+
   Future<DatabaseNote> createNewNote() async {
     final existingNote = _note;
     if (existingNote != null) {
@@ -52,13 +59,6 @@ class _NewNoteViewState extends State<NewNoteView> {
   void _setupTextControllerListener() {
     _textController.removeListener(_textControllerListener);
     _textController.addListener(_textControllerListener);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _notesService = NotesService();
-    _textController = TextEditingController();
   }
 
   @override
