@@ -22,7 +22,7 @@ class _NotesViewState extends State<NotesView> {
   void initState() {
     super.initState();
     _notesService = NotesService();
-    _notesService.open();
+    // _notesService.open();
   }
 
   @override
@@ -33,7 +33,7 @@ class _NotesViewState extends State<NotesView> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(newNoteRoute);
+              Navigator.of(context).pushNamed(createOrUpdateNoteRoute);
             },
             icon: const Icon(Icons.add),
           ),
@@ -80,8 +80,14 @@ class _NotesViewState extends State<NotesView> {
                         final allNotes = snapshot.data as List<DatabaseNote>;
                         return NotesListView(
                           notes: allNotes,
-                          onDeleteNote: (note) async {
+                          onDelete: (note) async {
                             await _notesService.deleteNote(id: note.id);
+                          },
+                          onTap: (note) {
+                            Navigator.of(context).pushNamed(
+                              createOrUpdateNoteRoute,
+                              arguments: note,
+                            );
                           },
                         );
                       } else {
