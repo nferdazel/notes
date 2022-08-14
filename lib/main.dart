@@ -51,20 +51,9 @@ class HomePage extends StatelessWidget {
             return const NotesView();
 
           default:
-            return const LoadingView();
+            return const Center(child: CircularProgressIndicator());
         }
       },
-    );
-  }
-}
-
-class LoadingView extends StatelessWidget {
-  const LoadingView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
     );
   }
 }
