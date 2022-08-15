@@ -38,7 +38,6 @@ class HomePage extends StatelessWidget {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
             final user = AuthService.firebase().currentUser;
-
             if (user != null) {
               if (user.isEmailVerified) {
               } else {
@@ -47,9 +46,7 @@ class HomePage extends StatelessWidget {
             } else {
               return const LoginView();
             }
-
             return const NotesView();
-
           default:
             return const Center(child: CircularProgressIndicator());
         }
