@@ -15,7 +15,7 @@ void main() {
 
       test('cannot log out if not initialized', () {
         expect(
-          provider.logOut(),
+          provider.logout(),
           throwsA(const TypeMatcher<NotInitializedException>()),
         );
       });
@@ -74,8 +74,8 @@ void main() {
       });
 
       test('should be able to log out and log in again', () async {
-        await provider.logOut();
-        await provider.logIn(
+        await provider.logout();
+        await provider.login(
           email: 'email',
           password: 'password',
         );
@@ -101,7 +101,7 @@ class MockAuthProvider implements AuthProvider {
   }) async {
     if (!isInitialized) throw NotInitializedException();
     await Future.delayed(const Duration(seconds: 1));
-    return logIn(
+    return login(
       email: email,
       password: password,
     );
@@ -117,7 +117,7 @@ class MockAuthProvider implements AuthProvider {
   }
 
   @override
-  Future<AuthUser> logIn({
+  Future<AuthUser> login({
     required String email,
     required String password,
   }) {
@@ -136,7 +136,7 @@ class MockAuthProvider implements AuthProvider {
   }
 
   @override
-  Future<void> logOut() async {
+  Future<void> logout() async {
     if (!isInitialized) throw NotInitializedException();
     if (_user == null) throw UserNotFoundAuthException();
 
