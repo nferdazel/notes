@@ -20,7 +20,6 @@ class _LoginViewState extends State<LoginView> {
   @override
   void initState() {
     super.initState();
-
     _email = TextEditingController();
     _password = TextEditingController();
   }
@@ -29,7 +28,6 @@ class _LoginViewState extends State<LoginView> {
   void dispose() {
     _email.dispose();
     _password.dispose();
-
     super.dispose();
   }
 
@@ -53,21 +51,26 @@ class _LoginViewState extends State<LoginView> {
             controller: _password,
             decoration: const InputDecoration(hintText: 'Enter your password'),
           ),
-          TextButton(
-            onPressed: () async {
-              final email = _email.text;
-              final password = _password.text;
-              try {
-                context.read<AuthBloc>().add(AuthEventLogin(email, password));
-              } on UserNotFoundAuthException {
-                await showErrorDialog(context, 'user not found');
-              } on WrongPasswordAuthException {
-                await showErrorDialog(context, 'wrong credentials');
-              } on GenericAuthException {
-                await showErrorDialog(context, 'authentication error');
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) async {
+              if (state is AuthStateLoggedOut) {
+                if (state.exception is UserNotFoundAuthException) {
+                  await showErrorDialog(context, 'user not found');
+                } else if (state.exception is WrongPasswordAuthException) {
+                  await showErrorDialog(context, 'wrong credentials');
+                } else if (state.exception is GenericAuthException) {
+                  await showErrorDialog(context, 'authentication error');
+                }
               }
             },
-            child: const Text('Login'),
+            child: TextButton(
+              onPressed: () async {
+                final email = _email.text;
+                final password = _password.text;
+                context.read<AuthBloc>().add(AuthEventLogin(email, password));
+              },
+              child: const Text('Login'),
+            ),
           ),
           TextButton(
             onPressed: () {
