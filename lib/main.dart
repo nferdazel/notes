@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes/views/forgot_password_view.dart';
 
 import 'constants/routes.dart';
 import 'helpers/loading/loading_screen.dart';
 import 'services/auth/bloc/auth_bloc.dart';
 import 'services/auth/firebase_auth_provider.dart';
+import 'views/forgot_password_view.dart';
 import 'views/login_view.dart';
 import 'views/notes/create_update_note_view.dart';
 import 'views/notes/notes_view.dart';
