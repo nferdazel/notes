@@ -1,0 +1,58 @@
+on:
+  push:
+    branches:
+      - main
+
+name: Build and Release Apps
+jobs:
+  build:
+    name: Build Apps
+    runs-on: macos-latest
+    steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=1.0.0+1" >> $GITHUB_ENV
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: "8"
+          distribution: "adopt"
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+      - name: Install pub dependencies
+        run: flutter pub get
+
+      - name: Run Tests
+        run: flutter test
+
+      - name: Build Android app
+        run: flutter build apk --split-per-abi --release
+
+      - name: Build app bundle
+        run: flutter build appbundle --release
+      # - name: Build iOS app
+      #   run: |
+      #     flutter build ios --release --no-codesign
+      #     cd build/ios/iphoneos
+      #     mkdir Payload
+      #     cd Payload
+      #     ln -s ../Runner.app
+      #     cd ..
+      #     zip -r app.ipa Payload
+      # ------------------------------------
+      # - name: Build Web App
+      #   run: |
+      #     flutter build web
+      #     cd build/web
+      #     zip -r web-app.zip .
+      - name: Release builds
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{env.APP_VERSION}}
+          name: ${{env.APP_VERSION}}
+          token: ${{secrets.GITHUB_TOKEN}}
+          # artifacts: 'build/app/outputs/apk/release/*.apk,build/ios/iphoneos/app.ipa,build/web/web-app.zip'
+          artifacts: "build/app/outputs/bundle/release/*.aab, build/app/outputs/apk/release/*.apk,"
