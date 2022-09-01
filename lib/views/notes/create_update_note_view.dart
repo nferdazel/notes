@@ -8,8 +8,7 @@ import '../../utilities/dialogs/cannot_share_empty_note_dialog.dart';
 import '../../utilities/generics/get_arguments.dart';
 
 class CreateUpdateNoteView extends StatefulWidget {
-  const CreateUpdateNoteView({Key? key}) : super(key: key);
-
+  const CreateUpdateNoteView({super.key});
   @override
   State<CreateUpdateNoteView> createState() => _CreateUpdateNoteViewState();
 }

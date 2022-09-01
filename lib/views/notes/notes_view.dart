@@ -11,8 +11,7 @@ import '../../utilities/dialogs/logout_dialog.dart';
 import 'notes_list_view.dart';
 
 class NotesView extends StatefulWidget {
-  const NotesView({Key? key}) : super(key: key);
-
+  const NotesView({super.key});
   @override
   State<NotesView> createState() => _NotesViewState();
 }
